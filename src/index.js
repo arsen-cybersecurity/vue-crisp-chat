@@ -1,5 +1,5 @@
 module.exports = {
-    install(Vue, { websiteId, tokenId, disabled }) {
+    install(Vue, { websiteId, tokenId, runtimeConfig, disabled }) {
       if (!disabled && (!websiteId || websiteId.length === 0)) {
         console.warn("Please provide a Crisp Chat Website ID");
       } else {
@@ -8,6 +8,10 @@ module.exports = {
         
       if (tokenId && tokenId.length !== 0) {
           window.CRISP_TOKEN_ID = tokenId
+      }
+        
+      if (typeof runtimeConfig === 'object' && runtimeConfig !== null) {
+          window.CRISP_RUNTIME_CONFIG = runtimeConfig
       }
 
       const disabledLogger = function(method, ...args) {
